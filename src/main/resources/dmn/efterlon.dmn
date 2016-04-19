@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="efterlon">
+    <decisionTable id="decisionTable">
+      <input id="InputClause_134bixe" label="BirthYear">
+        <inputExpression id="LiteralExpression_13g8wod" typeRef="integer">        <text>birthYear</text>
+</inputExpression>
+      </input>
+      <input id="input1" label="MinimumAge">
+        <inputExpression id="inputExpression1" typeRef="integer">        <text>age</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0q63d8s" label="MaximumAge">
+        <inputExpression id="LiteralExpression_09w94pi" typeRef="integer">        <text>age</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Efterlon" name="efterlon" typeRef="boolean" />
+      <rule id="row-746056994-1">
+        <inputEntry id="UnaryTests_08ovvvs">        <text><![CDATA[<=1953]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_12rz5k3">        <text><![CDATA[>= 60]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1sitnn3">        <text><![CDATA[<= 65]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1g20e2v">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-746056994-2">
+        <inputEntry id="UnaryTests_0t9ajh0">        <text>1954</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0z20lmm">        <text><![CDATA[>= 61]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_00z4fgm">        <text><![CDATA[<= 66]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1yxl6b0">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-746056994-3">
+        <inputEntry id="UnaryTests_0yp5wu0">        <text>1955</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_159fk79">        <text><![CDATA[>= 62]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1wn9uwz">        <text><![CDATA[<= 67]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0xclxx7">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-746056994-4">
+        <inputEntry id="UnaryTests_0mg24zd">        <text>[1956..1958]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_10gh314">        <text><![CDATA[>= 63]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0p8mdas">        <text><![CDATA[<= 67]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1hstvv5">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-746056994-5">
+        <inputEntry id="UnaryTests_0hc984e">        <text>[1959..1962]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1go6x16">        <text><![CDATA[>= 64]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_06pq4pv">        <text><![CDATA[<= 67]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_058lk3y">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-746056994-6">
+        <inputEntry id="UnaryTests_1u2mjpk">        <text>[1963..1966]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_08818q1">        <text><![CDATA[>= 65]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0bt1l5u">        <text><![CDATA[<= 68]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0o7a0mt">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-746056994-7">
+        <inputEntry id="UnaryTests_0lvl7h6">        <text><![CDATA[>=1967]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_017prb7">        <text><![CDATA[>= 65]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_02dtk79">        <text><![CDATA[<= 68]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1s1ew25">        <text>true</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
