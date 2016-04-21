@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -45,12 +47,14 @@ public class DmnServiceImpl {
         int age = Period.between(birthDate, dateTimeProvider.nowAsDate()).getYears();
 
         VariableMap variables = Variables
+                .putValue("currentDate", Date.from(dateTimeProvider.nowAsDate().atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .putValue("birthYear", birthYear)
                 .putValue("age", age);
 
         DmnDecision decision = dmnEngine.parseDecision("decision", is);
         DmnDecisionTableResult result = dmnEngine.evaluateDecisionTable(decision, variables);
-        return Optional.ofNullable(result.getSingleResult()/*.getSingleEntry()*/).isPresent();
+        //return Optional.ofNullable(result.getSingleResult().get("efterlon")).isPresent();
+        return ((Boolean) result.getSingleResult().get("efterlon")).booleanValue();
     }
 
 }
