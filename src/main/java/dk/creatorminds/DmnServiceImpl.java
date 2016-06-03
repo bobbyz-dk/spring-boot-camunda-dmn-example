@@ -8,6 +8,7 @@ import org.camunda.bpm.dmn.engine.DmnEngine;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -23,26 +24,18 @@ import java.util.Optional;
 @Service
 public class DmnServiceImpl {
 
-    private final DmnEngine dmnEngine;
     private DateTimeProvider dateTimeProvider;
-    private final Resource resource;
+    @Autowired
+    private DmnEngine dmnEngine;
+    @Autowired @Qualifier(value = "efterlon")
+    private DmnDecision decision;
 
     @Autowired
-    public DmnServiceImpl(DmnEngine dmnEngine,
-                          DateTimeProvider dateTimeProvider) {
-        this.dmnEngine = dmnEngine;
+    public DmnServiceImpl(DateTimeProvider dateTimeProvider) {
         this.dateTimeProvider = dateTimeProvider;
-        resource = new ClassPathResource("dmn/efterlon.dmn");
     }
 
     public boolean validateEfterlonFleksydelseAge(LocalDate birthDate) {
-        InputStream is = null;
-        try {
-            is = resource.getInputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         int birthYear = birthDate.getYear();
         int age = Period.between(birthDate, dateTimeProvider.nowAsDate()).getYears();
 
@@ -51,7 +44,6 @@ public class DmnServiceImpl {
                 .putValue("birthYear", birthYear)
                 .putValue("age", age);
 
-        DmnDecision decision = dmnEngine.parseDecision("decision", is);
         DmnDecisionTableResult result = dmnEngine.evaluateDecisionTable(decision, variables);
         //return Optional.ofNullable(result.getSingleResult().get("efterlon")).isPresent();
         return ((Boolean) result.getSingleResult().get("efterlon")).booleanValue();

@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ import java.util.Date;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DmnApplication.class)
 public class DmnApplicationTests {
@@ -27,6 +29,7 @@ public class DmnApplicationTests {
     private static final ZoneId UTC = ZoneId.of("UTC");
     private static final ZoneId DEFAULT_ZONE = ZoneId.systemDefault();
 
+    @Autowired
     private MutableDateTimeProvider mutableDateTimeProvider;
 
     private static final int YEAR = 2016;
@@ -37,14 +40,11 @@ public class DmnApplicationTests {
     private static final int SECOND = 0;
     private static final int NANO_SECOND = 0;
 
-    @Autowired private DmnEngine dmnEngine;
+    @Autowired
     private DmnServiceImpl dmnService;
 
     @Before
     public void setup() throws Exception {
-        mutableDateTimeProvider = new MutableDateTimeProvider();
-        dmnService = new DmnServiceImpl(dmnEngine, mutableDateTimeProvider);
-
         setDateTime(YEAR, MONTH, DAY, HOUR, MINUTE, SECOND);
     }
 
