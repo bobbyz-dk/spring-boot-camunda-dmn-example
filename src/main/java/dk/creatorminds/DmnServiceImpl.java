@@ -39,8 +39,10 @@ public class DmnServiceImpl {
         int birthYear = birthDate.getYear();
         int age = Period.between(birthDate, dateTimeProvider.nowAsDate()).getYears();
 
+        Date currentDate = Date.from(dateTimeProvider.nowAsDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        //System.err.println(currentDate.toString());
         VariableMap variables = Variables
-                .putValue("currentDate", Date.from(dateTimeProvider.nowAsDate().atStartOfDay(ZoneId.systemDefault()).toInstant()))
+                .putValue("currentDate", currentDate)
                 .putValue("birthYear", birthYear)
                 .putValue("age", age);
 

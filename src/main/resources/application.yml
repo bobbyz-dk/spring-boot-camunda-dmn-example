@@ -1,1 +1,1 @@
-logging.level.org.camunda: debug
+logging.level.org.camunda.bpm: debug
